@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <unistd.h>
 #include "screen.h"
 #include "utils.h"
 #include "heat.h"
@@ -16,10 +17,6 @@ int main() {
 	int ymax = screen_ymax();
 
 	Heat *c = heat_new(xmax, ymax);
-
-//	if( !heat_add_source(c, 0, 0, 10, 500) ){
-//		error_exit((char*) "Error adding heat source", 1);		
-//	}
 
 	if( !heat_add_source(c, 40, 30, 20, 10000) ){
 		screen_fini();
@@ -39,7 +36,7 @@ int main() {
 	while( heat_jacobi(c) > 0.1 ){
 		heat_colormap(c, 250);
 		screen_draw_colormap(c->colormap);
-
+		usleep(10000);
 	}
 
 	//wait to end
