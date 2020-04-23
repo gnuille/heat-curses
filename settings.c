@@ -7,8 +7,9 @@ Settings* parse_args(int argc, char **argv){
 	s->xmax=screen_xmax();
 	s->ymax=screen_ymax();
 	s->udelay=0;
+	s->residual=0.1;
 	int aux;
-	while( (aux = getopt(argc, argv, "t:m:")) != -1){
+	while( (aux = getopt(argc, argv, "t:m:r:")) != -1){
 		switch(aux){
 			case 't':
 				s->udelay=atof(optarg);
@@ -25,6 +26,9 @@ Settings* parse_args(int argc, char **argv){
 				}else{
 					error_exit("Error mode not recognized", 2);
 				}
+				break;
+			case 'r':
+				s->residual=atof(optarg);
 				break;
 			case '?':
 				error_exit("Error option not recognized", 2);

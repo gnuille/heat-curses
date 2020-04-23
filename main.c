@@ -15,7 +15,6 @@ int main(int argc, char **argv) {
 		error_exit((char*) "Error initializing curses", 2);
 	}
 
-	getch();
 	
 	//settings
 	Settings *s = parse_args(argc, argv);
@@ -29,7 +28,7 @@ int main(int argc, char **argv) {
 		}
 	}
 
-	while( heat_jacobi(c) > 0.1 ){
+	while( heat_jacobi(c) > s->residual){
 		heat_colormap(c, 250);
 		screen_draw_colormap(c->colormap);
 		usleep(s->udelay);
