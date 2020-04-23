@@ -9,5 +9,5 @@ make
 
 ## Execute
 ```bash
-./main.x
+./main.x -m center
 ```
