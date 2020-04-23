@@ -1,42 +1,38 @@
+#include "settings.h"
 #include <stdlib.h>
 #include <unistd.h>
 #include "screen.h"
 #include "utils.h"
 #include "heat.h"
 
-int main() {
 
+int main(int argc, char **argv) {
+
+	
 	//initialize screen
 	if(!screen_init()){
 		screen_fini();
 		error_exit((char*) "Error initializing curses", 2);
 	}
 
-	//get terminal values
-	int xmax = screen_xmax();
-	int ymax = screen_ymax();
+	getch();
+	
+	//settings
+	Settings *s = parse_args(argc, argv);
 
-	Heat *c = heat_new(xmax, ymax);
-
-	if( !heat_add_source(c, 40, 30, 20, 10000) ){
-		screen_fini();
-		error_exit((char*) "Error adding heat source", 1);		
-	}
-
-	if( !heat_add_source(c, 100, 10, 29, 10000) ){
-		screen_fini();
-		error_exit((char*) "Error adding heat source", 1);		
-	}
-
-	if( !heat_add_source(c, 60, 10, 29, 10000) ){
-		screen_fini();
-		error_exit((char*) "Error adding heat source", 1);		
+	Heat *c = heat_new(s->xmax, s->ymax);
+	
+	for(int i = 0; i < s->nSources; i++){
+		if( !heat_add_heatsource(c, s->heatSources[i])){
+			screen_fini();
+			error_exit((char *) "Error adding Heat Source",2);
+		}
 	}
 
 	while( heat_jacobi(c) > 0.1 ){
 		heat_colormap(c, 250);
 		screen_draw_colormap(c->colormap);
-		usleep(10000);
+		usleep(s->udelay);
 	}
 
 	//wait to end

@@ -30,8 +30,23 @@ int heat_add_source(Heat* h, int x, int y, int r, double T){
 	return 1;
 }
 
+HeatSource* heat_new_heatsource(int x, int y, int r, double T){
+	HeatSource *ret = malloc(sizeof(HeatSource));
+	ret->x = x;
+	ret->y = y;
+	ret->r = r;
+	ret->T = T;
+
+	return ret;
+}
+
+int heat_add_heatsource(Heat* h, HeatSource* s){
+	if(!heat_add_source(h, s->x, s->y, s->r, s->T)) return 0;
+	free(s);
+	return 1;
+}
+
 double heat_jacobi(Heat* h){
-	
 	//compute
 	double res=0;
 	double diff;
