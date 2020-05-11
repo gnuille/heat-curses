@@ -1,4 +1,4 @@
-#include "screen.h"
+#include <screen.h>
 
 int screen_init(){
 	initscr();

@@ -1,4 +1,4 @@
-#include "heat.h"
+#include <heat.h>
 
 Heat* heat_new(int x, int y){
 	Heat* n = (Heat*) malloc(sizeof(Heat));

@@ -1,4 +1,4 @@
-#include "settings.h"
+#include <settings.h>
 
 
 Settings* parse_args(int argc, char **argv){

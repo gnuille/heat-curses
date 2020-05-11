@@ -1,9 +1,9 @@
-#include "settings.h"
+#include <settings.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "screen.h"
-#include "utils.h"
-#include "heat.h"
+#include <screen.h>
+#include <utils.h>
+#include <heat.h>
 
 
 int main(int argc, char **argv) {
