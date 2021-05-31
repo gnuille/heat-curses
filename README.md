@@ -9,5 +9,10 @@ make
 
 ## Execute
 ```bash
-./main.x -m center
+./main.x -t 10000 -m random 
 ```
+
+## Parameters
+
+* `-t INT`: Usecs between frames.
+* `-m CONFIG`: Configuration used. Right now center, 2center and random supported.
