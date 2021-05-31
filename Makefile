@@ -1,10 +1,11 @@
 OBJS=main.o screen.o heat.o utils.o settings.o
-CFLAGS= -g
+CFLAGS= -g 
+EXTRALIB=-lncurses 
 
 all: main.x 
 
 main.x: $(OBJS)
-	gcc $(CFLAGS) -o  $@ $^ -lncurses
+	gcc $(CFLAGS) -o  $@ $^ $(EXTRALIB)
 
 %.o: %.c
 	gcc -c $(CFLAGS) $<
